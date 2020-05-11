@@ -1,0 +1,87 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="ATMCModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="temp1">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PO" Type="varchar" MaxLength="50" />
+          <Property Name="Model_name" Type="varchar" MaxLength="255" />
+          <Property Name="物料" Type="varchar" MaxLength="255" />
+          <Property Name="缺料數量" Type="float" />
+          <Property Name="UnitsInStock" Type="ntext" />
+          <Property Name="物管" Type="varchar" MaxLength="50" />
+          <Property Name="createDate" Type="datetime" />
+        </EntityType>
+        <EntityContainer Name="ATMCModelStoreContainer">
+          <EntitySet Name="temp1" EntityType="Self.temp1" Schema="M3_TEMP" store:Type="Tables" />
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ATMCModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="temp1">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="PO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Model_name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="物料" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="缺料數量" Type="Double" />
+          <Property Name="UnitsInStock" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="物管" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="createDate" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityContainer Name="ATMCEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="temp1" EntityType="Self.temp1" />
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ATMCModelStoreContainer" CdmEntityContainer="ATMCEntities">
+          <EntitySetMapping Name="temp1">
+            <EntityTypeMapping TypeName="ATMCModel.temp1">
+              <MappingFragment StoreEntitySet="temp1">
+                <ScalarProperty Name="createDate" ColumnName="createDate" />
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="PO" ColumnName="PO" />
+                <ScalarProperty Name="Model_name" ColumnName="Model_name" />
+                <ScalarProperty Name="物料" ColumnName="物料" />
+                <ScalarProperty Name="缺料數量" ColumnName="缺料數量" />
+                <ScalarProperty Name="UnitsInStock" ColumnName="UnitsInStock" />
+                <ScalarProperty Name="物管" ColumnName="物管" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -1,0 +1,202 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="TWM3Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="prepare_Schedule">
+          <Key>
+            <PropertyRef Name="prepareID" />
+          </Key>
+          <Property Name="prepareID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ondatetime" Type="datetime" />
+          <Property Name="PO" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Model_name" Type="varchar" MaxLength="255" />
+          <Property Name="CLASS" Type="varchar" MaxLength="50" />
+          <Property Name="line_name" Type="varchar" MaxLength="50" />
+          <Property Name="process_category" Type="varchar" MaxLength="50" />
+          <Property Name="prepare_stateID" Type="int" Nullable="false" />
+          <Property Name="input_time" Type="datetime" />
+          <Property Name="receive_time" Type="datetime" />
+          <Property Name="prepare_Stime" Type="varchar" MaxLength="50" />
+          <Property Name="prepare_Ftime" Type="varchar" MaxLength="50" />
+          <Property Name="output_time" Type="datetime" />
+          <Property Name="PC_Schedule" Type="datetime" />
+          <Property Name="ORDERS" Type="decimal" Precision="10" Scale="0" />
+          <Property Name="Reason" Type="varchar(max)" />
+        </EntityType>
+        <EntityType Name="備料明細">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="訂單" Type="varchar" MaxLength="50" />
+          <Property Name="需求溯源" Type="varchar" MaxLength="255" />
+          <Property Name="物料" Type="varchar" MaxLength="255" />
+          <Property Name="SLoc" Type="varchar" MaxLength="10" />
+          <Property Name="生產儲位" Type="varchar" MaxLength="50" />
+          <Property Name="狀態" Type="varchar" MaxLength="50" />
+          <Property Name="需求日期" Type="datetime" />
+          <Property Name="需求數量" Type="float" />
+          <Property Name="領料數量" Type="float" />
+          <Property Name="採購群組" Type="varchar" MaxLength="50" />
+          <Property Name="負責人" Type="varchar" MaxLength="50" />
+          <Property Name="工位" Type="varchar" MaxLength="255" />
+          <Property Name="上傳日期" Type="datetime" />
+          <Property Name="領料日期" Type="datetime" />
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="儲格" Type="varchar" MaxLength="10" />
+          <Property Name="缺料數量" Type="float" />
+          <Property Name="儲格分類" Type="varchar" MaxLength="50" />
+          <Property Name="物管" Type="varchar" MaxLength="50" />
+          <Property Name="UnitsInStock" Type="nvarchar(max)" />
+          <Property Name="回覆日期" Type="datetime" />
+          <Property Name="領料人" Type="varchar" MaxLength="20" />
+          <Property Name="SAP_MdDate" Type="datetime" />
+          <Property Name="MAT_CAPTION_ORDER" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityContainer Name="TWM3ModelStoreContainer">
+          <EntitySet Name="prepare_Schedule" EntityType="Self.prepare_Schedule" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="備料明細" EntityType="Self.備料明細" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="TWM3Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="prepare_Schedule">
+          <Key>
+            <PropertyRef Name="prepareID" />
+          </Key>
+          <Property Name="prepareID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ondatetime" Type="DateTime" Precision="3" />
+          <Property Name="PO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Model_name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="CLASS" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="line_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="process_category" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="prepare_stateID" Type="Int32" Nullable="false" />
+          <Property Name="input_time" Type="DateTime" Precision="3" />
+          <Property Name="receive_time" Type="DateTime" Precision="3" />
+          <Property Name="prepare_Stime" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="prepare_Ftime" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="output_time" Type="DateTime" Precision="3" />
+          <Property Name="PC_Schedule" Type="DateTime" Precision="3" />
+          <Property Name="ORDERS" Type="Decimal" Precision="10" Scale="0" />
+          <Property Name="Reason" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="備料明細">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="訂單" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="需求溯源" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="物料" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="SLoc" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="生產儲位" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="狀態" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="需求日期" Type="DateTime" Precision="3" />
+          <Property Name="需求數量" Type="Double" />
+          <Property Name="領料數量" Type="Double" />
+          <Property Name="採購群組" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="負責人" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="工位" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="上傳日期" Type="DateTime" Precision="3" />
+          <Property Name="領料日期" Type="DateTime" Precision="3" />
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="儲格" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="缺料數量" Type="Double" />
+          <Property Name="儲格分類" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="物管" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="UnitsInStock" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="回覆日期" Type="DateTime" Precision="3" />
+          <Property Name="領料人" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="SAP_MdDate" Type="DateTime" Precision="3" />
+          <Property Name="MAT_CAPTION_ORDER" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityContainer Name="TWM3Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="prepare_Schedule" EntityType="Self.prepare_Schedule" />
+          <EntitySet Name="備料明細" EntityType="Self.備料明細" />
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="TWM3ModelStoreContainer" CdmEntityContainer="TWM3Entities">
+          <EntitySetMapping Name="prepare_Schedule">
+            <EntityTypeMapping TypeName="TWM3Model.prepare_Schedule">
+              <MappingFragment StoreEntitySet="prepare_Schedule">
+                <ScalarProperty Name="prepareID" ColumnName="prepareID" />
+                <ScalarProperty Name="ondatetime" ColumnName="ondatetime" />
+                <ScalarProperty Name="PO" ColumnName="PO" />
+                <ScalarProperty Name="Model_name" ColumnName="Model_name" />
+                <ScalarProperty Name="CLASS" ColumnName="CLASS" />
+                <ScalarProperty Name="line_name" ColumnName="line_name" />
+                <ScalarProperty Name="process_category" ColumnName="process_category" />
+                <ScalarProperty Name="prepare_stateID" ColumnName="prepare_stateID" />
+                <ScalarProperty Name="input_time" ColumnName="input_time" />
+                <ScalarProperty Name="receive_time" ColumnName="receive_time" />
+                <ScalarProperty Name="prepare_Stime" ColumnName="prepare_Stime" />
+                <ScalarProperty Name="prepare_Ftime" ColumnName="prepare_Ftime" />
+                <ScalarProperty Name="output_time" ColumnName="output_time" />
+                <ScalarProperty Name="PC_Schedule" ColumnName="PC_Schedule" />
+                <ScalarProperty Name="ORDERS" ColumnName="ORDERS" />
+                <ScalarProperty Name="Reason" ColumnName="Reason" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="備料明細">
+            <EntityTypeMapping TypeName="TWM3Model.備料明細">
+              <MappingFragment StoreEntitySet="備料明細">
+                <ScalarProperty Name="訂單" ColumnName="訂單" />
+                <ScalarProperty Name="需求溯源" ColumnName="需求溯源" />
+                <ScalarProperty Name="物料" ColumnName="物料" />
+                <ScalarProperty Name="SLoc" ColumnName="SLoc" />
+                <ScalarProperty Name="生產儲位" ColumnName="生產儲位" />
+                <ScalarProperty Name="狀態" ColumnName="狀態" />
+                <ScalarProperty Name="需求日期" ColumnName="需求日期" />
+                <ScalarProperty Name="需求數量" ColumnName="需求數量" />
+                <ScalarProperty Name="領料數量" ColumnName="領料數量" />
+                <ScalarProperty Name="採購群組" ColumnName="採購群組" />
+                <ScalarProperty Name="負責人" ColumnName="負責人" />
+                <ScalarProperty Name="工位" ColumnName="工位" />
+                <ScalarProperty Name="上傳日期" ColumnName="上傳日期" />
+                <ScalarProperty Name="領料日期" ColumnName="領料日期" />
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="儲格" ColumnName="儲格" />
+                <ScalarProperty Name="缺料數量" ColumnName="缺料數量" />
+                <ScalarProperty Name="儲格分類" ColumnName="儲格分類" />
+                <ScalarProperty Name="物管" ColumnName="物管" />
+                <ScalarProperty Name="UnitsInStock" ColumnName="UnitsInStock" />
+                <ScalarProperty Name="回覆日期" ColumnName="回覆日期" />
+                <ScalarProperty Name="領料人" ColumnName="領料人" />
+                <ScalarProperty Name="SAP_MdDate" ColumnName="SAP_MdDate" />
+                <ScalarProperty Name="MAT_CAPTION_ORDER" ColumnName="MAT_CAPTION_ORDER" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
