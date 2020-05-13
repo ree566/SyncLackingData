@@ -8,12 +8,14 @@
     <OutputType>WinExe</OutputType>
     <RootNamespace>SyncLackingData</RootNamespace>
     <AssemblyName>SyncLackingData</AssemblyName>
-    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <TargetFrameworkProfile />
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -26,7 +28,6 @@
     <MapFileExtensions>true</MapFileExtensions>
     <ApplicationRevision>0</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
-    <IsWebBootstrapper>false</IsWebBootstrapper>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
@@ -108,6 +109,12 @@
       <HintPath>..\packages\Microsoft.Win32.Primitives.4.3.0\lib\net46\Microsoft.Win32.Primitives.dll</HintPath>
       <Private>True</Private>
       <Private>True</Private>
+    </Reference>
+    <Reference Include="MySql.Data, Version=6.10.9.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
+      <HintPath>..\packages\MySql.Data.6.10.9\lib\net452\MySql.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="MySql.Data.Entity.EF6, Version=6.10.9.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
+      <HintPath>..\packages\MySql.Data.Entity.6.10.9\lib\net452\MySql.Data.Entity.EF6.dll</HintPath>
     </Reference>
     <Reference Include="Remotion.Linq, Version=2.1.0.0, Culture=neutral, PublicKeyToken=fee00910d6e5f53b, processorArchitecture=MSIL">
       <HintPath>..\packages\Remotion.Linq.2.1.1\lib\net45\Remotion.Linq.dll</HintPath>
@@ -327,12 +334,36 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="items.cs">
+      <DependentUpon>Lacking.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Lacking.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Lacking.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Lacking.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Lacking.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Lacking.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Lacking.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="orders.cs">
+      <DependentUpon>Lacking.tt</DependentUpon>
+    </Compile>
     <Compile Include="prepare_Schedule.cs">
       <DependentUpon>TWM3.tt</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="temp1.cs">
+      <DependentUpon>ATMC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="temp2.cs">
       <DependentUpon>ATMC.tt</DependentUpon>
     </Compile>
     <Compile Include="TWM3.Context.cs">
@@ -350,6 +381,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>TWM3.edmx</DependentUpon>
     </Compile>
+    <Compile Include="users.cs">
+      <DependentUpon>Lacking.tt</DependentUpon>
+    </Compile>
     <Compile Include="備料明細.cs">
       <DependentUpon>TWM3.tt</DependentUpon>
     </Compile>
@@ -364,13 +398,21 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
+    <EntityDeploy Include="Lacking.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>Lacking.Designer.cs</LastGenOutput>
+    </EntityDeploy>
     <EntityDeploy Include="ATMC.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>ATMC.Designer.cs</LastGenOutput>
     </EntityDeploy>
     <None Include="ATMC.edmx.diagram">
       <DependentUpon>ATMC.edmx</DependentUpon>
+    </None>
+    <None Include="Lacking.edmx.diagram">
+      <DependentUpon>Lacking.edmx</DependentUpon>
     </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
@@ -403,6 +445,16 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>ATMC.edmx</DependentUpon>
       <LastGenOutput>ATMC.cs</LastGenOutput>
+    </Content>
+    <Content Include="Lacking.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Lacking.edmx</DependentUpon>
+      <LastGenOutput>Lacking.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Lacking.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Lacking.edmx</DependentUpon>
+      <LastGenOutput>Lacking.cs</LastGenOutput>
     </Content>
     <Content Include="TWM3.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>

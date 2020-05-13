@@ -10,16 +10,29 @@
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="PO" Type="varchar" MaxLength="50" />
-          <Property Name="Model_name" Type="varchar" MaxLength="255" />
-          <Property Name="物料" Type="varchar" MaxLength="255" />
-          <Property Name="缺料數量" Type="float" />
-          <Property Name="UnitsInStock" Type="ntext" />
-          <Property Name="物管" Type="varchar" MaxLength="50" />
+          <Property Name="po" Type="varchar" MaxLength="50" />
+          <Property Name="modelName" Type="varchar" MaxLength="255" />
+          <Property Name="material" Type="varchar" MaxLength="255" />
+          <Property Name="shortage" Type="float" />
+          <Property Name="unitsInStock" Type="ntext" />
+          <Property Name="owner" Type="varchar" MaxLength="50" />
+          <Property Name="createDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="temp2">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="po" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="modelName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="material" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="quantity" Type="int" Nullable="false" />
+          <Property Name="remark" Type="nvarchar" MaxLength="500" />
           <Property Name="createDate" Type="datetime" />
         </EntityType>
         <EntityContainer Name="ATMCModelStoreContainer">
           <EntitySet Name="temp1" EntityType="Self.temp1" Schema="M3_TEMP" store:Type="Tables" />
+          <EntitySet Name="temp2" EntityType="Self.temp2" Schema="M3_TEMP" store:Type="Tables" />
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -29,35 +42,61 @@
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="PO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Model_name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Name="物料" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Name="缺料數量" Type="Double" />
-          <Property Name="UnitsInStock" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="物管" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="po" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="modelName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="material" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="shortage" Type="Double" />
+          <Property Name="unitsInStock" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="owner" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="createDate" Type="DateTime" Precision="3" />
         </EntityType>
-        <EntityContainer Name="ATMCEntities" annotation:LazyLoadingEnabled="true">
+        <EntityType Name="temp2">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="po" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="modelName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="quantity" Type="Int32" Nullable="false" />
+          <Property Name="remark" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="material" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="createDate" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityContainer Name="ATMCEntities1" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="temp1" EntityType="Self.temp1" />
+          <EntitySet Name="temp2" EntityType="Self.temp2" />
         </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="ATMCModelStoreContainer" CdmEntityContainer="ATMCEntities">
+        <EntityContainerMapping StorageEntityContainer="ATMCModelStoreContainer" CdmEntityContainer="ATMCEntities1">
           <EntitySetMapping Name="temp1">
             <EntityTypeMapping TypeName="ATMCModel.temp1">
               <MappingFragment StoreEntitySet="temp1">
-                <ScalarProperty Name="createDate" ColumnName="createDate" />
                 <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="PO" ColumnName="PO" />
-                <ScalarProperty Name="Model_name" ColumnName="Model_name" />
-                <ScalarProperty Name="物料" ColumnName="物料" />
-                <ScalarProperty Name="缺料數量" ColumnName="缺料數量" />
-                <ScalarProperty Name="UnitsInStock" ColumnName="UnitsInStock" />
-                <ScalarProperty Name="物管" ColumnName="物管" />
+                <ScalarProperty Name="po" ColumnName="po" />
+                <ScalarProperty Name="modelName" ColumnName="modelName" />
+                <ScalarProperty Name="material" ColumnName="material" />
+                <ScalarProperty Name="shortage" ColumnName="shortage" />
+                <ScalarProperty Name="unitsInStock" ColumnName="unitsInStock" />
+                <ScalarProperty Name="owner" ColumnName="owner" />
+                <ScalarProperty Name="createDate" ColumnName="createDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="temp2">
+            <EntityTypeMapping TypeName="ATMCModel.temp2">
+              <MappingFragment StoreEntitySet="temp2">
+                <ScalarProperty Name="createDate" ColumnName="createDate" />
+                <ScalarProperty Name="material" ColumnName="material" />
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="po" ColumnName="po" />
+                <ScalarProperty Name="modelName" ColumnName="modelName" />
+                <ScalarProperty Name="quantity" ColumnName="quantity" />
+                <ScalarProperty Name="remark" ColumnName="remark" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

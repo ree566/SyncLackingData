@@ -13,10 +13,10 @@ namespace SyncLackingData
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class ATMCEntities1 : DbContext
+    public partial class lackingEntities1 : DbContext
     {
-        public ATMCEntities1()
-            : base("name=ATMCEntities1")
+        public lackingEntities1()
+            : base("name=lackingEntities1")
         {
         }
     
@@ -25,7 +25,8 @@ namespace SyncLackingData
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<temp1> temp1 { get; set; }
-        public virtual DbSet<temp2> temp2 { get; set; }
+        public virtual DbSet<items> items { get; set; }
+        public virtual DbSet<orders> orders { get; set; }
+        public virtual DbSet<users> users { get; set; }
     }
 }

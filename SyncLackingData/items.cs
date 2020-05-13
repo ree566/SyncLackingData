@@ -12,15 +12,14 @@ namespace SyncLackingData
     using System;
     using System.Collections.Generic;
     
-    public partial class temp1
+    public partial class items
     {
-        public int id { get; set; }
-        public string po { get; set; }
-        public string modelName { get; set; }
-        public string material { get; set; }
-        public Nullable<double> shortage { get; set; }
-        public string unitsInStock { get; set; }
-        public string owner { get; set; }
-        public Nullable<System.DateTime> createDate { get; set; }
+        public long id { get; set; }
+        public string label_1 { get; set; }
+        public string label_2 { get; set; }
+        public string label_3 { get; set; }
+        public long order_id { get; set; }
+    
+        public virtual orders orders { get; set; }
     }
 }
