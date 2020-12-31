@@ -27,5 +27,7 @@ namespace SyncLackingData
     
         public virtual DbSet<temp1> temp1 { get; set; }
         public virtual DbSet<temp2> temp2 { get; set; }
+        public virtual DbSet<temp1_Log> temp1_Log { get; set; }
+        public virtual DbSet<temp2_Log> temp2_Log { get; set; }
     }
 }

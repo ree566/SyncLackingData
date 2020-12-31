@@ -18,6 +18,7 @@ namespace SyncLackingData
         public orders()
         {
             this.items = new HashSet<items>();
+            this.replies = new HashSet<replies>();
         }
     
         public long id { get; set; }
@@ -33,5 +34,7 @@ namespace SyncLackingData
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<items> items { get; set; }
         public virtual users users { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<replies> replies { get; set; }
     }
 }

@@ -28,6 +28,7 @@ namespace SyncLackingData
 
             this.SyncTwm3Data();
             this.SyncLackingData();
+            //this.TestLacking();
 
             Application.Exit();
         }
@@ -43,6 +44,10 @@ namespace SyncLackingData
                          缺料數量,PC_Schedule,prepare_state,物管,回覆日期,UnitsInStock 
                 ORDER BY 訂單 ASC
              */
+
+            //Remove all data first
+            var allData = from a in atmcDb.temp1 select a;
+            atmcDb.temp1.RemoveRange(allData);
 
             Console.WriteLine("Query Twm3 table...");
             var query = from a in twm3Db.備料明細
@@ -66,6 +71,18 @@ namespace SyncLackingData
             foreach (temp1 t in query)
             {
                 atmcDb.temp1.Add(t);
+
+                temp1_Log t_log = new temp1_Log()
+                {
+                    po = t.po,
+                    modelName = t.modelName,
+                    material = t.material,
+                    unitsInStock = t.unitsInStock,
+                    owner = t.owner,
+                    shortage = t.shortage,
+                    createDate = DateTime.Now
+                };
+                atmcDb.temp1_Log.Add(t_log);
             }
 
             Console.WriteLine("Save temp1 table...");
@@ -101,12 +118,19 @@ namespace SyncLackingData
                 orders.time_close = 0
            */
 
+            //Remove all data first
+            var allData = from a in atmcDb.temp2 select a;
+            atmcDb.temp2.RemoveRange(allData);
+
             Console.WriteLine("Query Lacking table...");
             var query = from o in lackingDb.orders
                         join i in lackingDb.items
                         on o.id equals i.order_id
                         join u in lackingDb.users
                         on o.user_id equals u.id
+                        join r in lackingDb.replies
+                        on o.id equals r.order_id into gj
+                        from sub_r in gj.DefaultIfEmpty()
                         where DateTime.Compare(o.time_close, DateTime.MinValue) <= 0
                         select new temp2
                         {
@@ -114,7 +138,7 @@ namespace SyncLackingData
                             modelName = i.label_2,
                             material = i.label_3,
                             quantity = o.number,
-                            remark = o.comment,
+                            remark = sub_r == null ? String.Empty : sub_r.comment,
                             createDate = DateTime.Now
                         };
 
@@ -123,6 +147,18 @@ namespace SyncLackingData
             foreach (temp2 t in query)
             {
                 atmcDb.temp2.Add(t);
+
+                temp2_Log t_Log = new temp2_Log()
+                {
+                    po = t.po,
+                    modelName = t.modelName,
+                    material = t.material,
+                    quantity = t.quantity,
+                    remark = t.remark,
+                    createDate = DateTime.Now
+                };
+
+                atmcDb.temp2_Log.Add(t_Log);
             }
 
             Console.WriteLine("Save temp2 table...");
@@ -130,21 +166,29 @@ namespace SyncLackingData
 
         }
 
-        private void testLacking()
+        private void TestLacking()
         {
             var query = from o in lackingDb.orders
-                        orderby o.id descending
-                        select new
+                        join i in lackingDb.items
+                        on o.id equals i.order_id
+                        join u in lackingDb.users
+                        on o.user_id equals u.id
+                        join r in lackingDb.replies
+                        on o.id equals r.order_id into gj
+                        from sub_r in gj.DefaultIfEmpty()
+                        where DateTime.Compare(o.time_close, DateTime.MinValue) <= 0 && i.label_1.Equals("TPK000532ZA")
+                        select new temp2
                         {
-                            timeClose = o.time_close,
-                            minValue = DateTime.MinValue,
-                            cp = DateTime.Compare(o.time_close, DateTime.MinValue)
+                            po = i.label_1,
+                            modelName = i.label_2,
+                            material = i.label_3,
+                            quantity = o.number,
+                            remark = sub_r == null ? String.Empty : sub_r.comment,
+                            createDate = DateTime.Now
                         };
 
-            var t = query.First();
-            Console.WriteLine(t.timeClose);
-            Console.WriteLine(t.minValue);
-            Console.WriteLine(t.cp);
+            Console.WriteLine(query.Count());
+
             //Console.WriteLine(DateTime.MinValue);
             //Console.WriteLine(query.First().time_close);
             //Console.WriteLine(DateTime.Compare(query.First().time_open, DateTime.MinValue));

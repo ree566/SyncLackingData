@@ -29,6 +29,17 @@
           <Property Name="time_close" Type="timestamp" Precision="0" Nullable="false" />
           <Property Name="respect_date" Type="datetime" Precision="0" />
         </EntityType>
+        <EntityType Name="replies">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="uint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="order_id" Type="uint" Nullable="false" />
+          <Property Name="team_id" Type="uint" Nullable="false" />
+          <Property Name="comment" Type="text" />
+          <Property Name="user_id" Type="char" MaxLength="10" />
+          <Property Name="time" Type="timestamp" Precision="0" Nullable="false" />
+        </EntityType>
         <EntityType Name="users">
           <Key>
             <PropertyRef Name="id" />
@@ -66,9 +77,36 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="replies_ibfk_1">
+          <End Role="orders" Type="Self.orders" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="replies" Type="Self.replies" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="orders">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="replies">
+              <PropertyRef Name="order_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="replies_ibfk_3">
+          <End Role="users" Type="Self.users" Multiplicity="0..1" />
+          <End Role="replies" Type="Self.replies" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="replies">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="lackingModelStoreContainer">
           <EntitySet Name="items" EntityType="Self.items" Schema="lacking" store:Type="Tables" />
           <EntitySet Name="orders" EntityType="Self.orders" Schema="lacking" store:Type="Tables" />
+          <EntitySet Name="replies" EntityType="Self.replies" Schema="lacking" store:Type="Tables" />
           <EntitySet Name="users" EntityType="Self.users" Schema="lacking" store:Type="Tables" />
           <AssociationSet Name="items_ibfk_1" Association="Self.items_ibfk_1">
             <End Role="orders" EntitySet="orders" />
@@ -77,6 +115,14 @@
           <AssociationSet Name="orders_ibfk_4" Association="Self.orders_ibfk_4">
             <End Role="users" EntitySet="users" />
             <End Role="orders" EntitySet="orders" />
+          </AssociationSet>
+          <AssociationSet Name="replies_ibfk_1" Association="Self.replies_ibfk_1">
+            <End Role="orders" EntitySet="orders" />
+            <End Role="replies" EntitySet="replies" />
+          </AssociationSet>
+          <AssociationSet Name="replies_ibfk_3" Association="Self.replies_ibfk_3">
+            <End Role="users" EntitySet="users" />
+            <End Role="replies" EntitySet="replies" />
           </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -109,6 +155,7 @@
           <Property Name="respect_date" Type="DateTime" />
           <NavigationProperty Name="items" Relationship="Self.items_ibfk_1" FromRole="orders" ToRole="items" />
           <NavigationProperty Name="users" Relationship="Self.orders_ibfk_4" FromRole="orders" ToRole="users" />
+          <NavigationProperty Name="replies" Relationship="lackingModel.replies_ibfk_1" FromRole="orders" ToRole="replies" />
         </EntityType>
         <EntityType Name="users">
           <Key>
@@ -121,6 +168,7 @@
           <Property Name="team_id" Type="Int64" Nullable="false" />
           <Property Name="mail" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="orders" Relationship="Self.orders_ibfk_4" FromRole="users" ToRole="orders" />
+          <NavigationProperty Name="replies" Relationship="lackingModel.replies_ibfk_3" FromRole="users" ToRole="replies" />
         </EntityType>
         <Association Name="items_ibfk_1">
           <End Role="orders" Type="Self.orders" Multiplicity="1">
@@ -160,7 +208,55 @@
             <End Role="users" EntitySet="users" />
             <End Role="orders" EntitySet="orders" />
           </AssociationSet>
+          <EntitySet Name="replies" EntityType="lackingModel.replies" />
+          <AssociationSet Name="replies_ibfk_1" Association="lackingModel.replies_ibfk_1">
+            <End Role="orders" EntitySet="orders" />
+            <End Role="replies" EntitySet="replies" />
+          </AssociationSet>
+          <AssociationSet Name="replies_ibfk_3" Association="lackingModel.replies_ibfk_3">
+            <End Role="users" EntitySet="users" />
+            <End Role="replies" EntitySet="replies" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="replies">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="order_id" Type="Int64" Nullable="false" />
+          <Property Name="team_id" Type="Int64" Nullable="false" />
+          <Property Name="comment" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" />
+          <Property Name="user_id" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="time" Type="DateTime" Nullable="false" />
+          <NavigationProperty Name="orders" Relationship="lackingModel.replies_ibfk_1" FromRole="replies" ToRole="orders" />
+          <NavigationProperty Name="users" Relationship="lackingModel.replies_ibfk_3" FromRole="replies" ToRole="users" />
+        </EntityType>
+        <Association Name="replies_ibfk_1">
+          <End Type="lackingModel.orders" Role="orders" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="lackingModel.replies" Role="replies" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="orders">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="replies">
+              <PropertyRef Name="order_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="replies_ibfk_3">
+          <End Type="lackingModel.users" Role="users" Multiplicity="0..1" />
+          <End Type="lackingModel.replies" Role="replies" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="replies">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -202,6 +298,18 @@
                 <ScalarProperty Name="name" ColumnName="name" />
                 <ScalarProperty Name="team_id" ColumnName="team_id" />
                 <ScalarProperty Name="mail" ColumnName="mail" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="replies">
+            <EntityTypeMapping TypeName="lackingModel.replies">
+              <MappingFragment StoreEntitySet="replies">
+                <ScalarProperty Name="time" ColumnName="time" />
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
+                <ScalarProperty Name="comment" ColumnName="comment" />
+                <ScalarProperty Name="team_id" ColumnName="team_id" />
+                <ScalarProperty Name="order_id" ColumnName="order_id" />
+                <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

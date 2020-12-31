@@ -28,5 +28,6 @@ namespace SyncLackingData
         public virtual DbSet<items> items { get; set; }
         public virtual DbSet<orders> orders { get; set; }
         public virtual DbSet<users> users { get; set; }
+        public virtual DbSet<replies> replies { get; set; }
     }
 }

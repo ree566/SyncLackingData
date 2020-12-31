@@ -7,6 +7,8 @@
       <Diagram DiagramId="ebfd06ca7e2a4a1897212f4798c38817" Name="Diagram1">
         <EntityTypeShape EntityType="ATMCModel.temp1" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="ATMCModel.temp2" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ATMCModel.temp1_Log" Width="1.5" PointX="0.75" PointY="4.75" />
+        <EntityTypeShape EntityType="ATMCModel.temp2_Log" Width="1.5" PointX="2.75" PointY="4.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

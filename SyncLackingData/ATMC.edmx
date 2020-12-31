@@ -18,7 +18,32 @@
           <Property Name="owner" Type="varchar" MaxLength="50" />
           <Property Name="createDate" Type="datetime" />
         </EntityType>
+        <EntityType Name="temp1_Log">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="po" Type="varchar" MaxLength="50" />
+          <Property Name="modelName" Type="varchar" MaxLength="255" />
+          <Property Name="material" Type="varchar" MaxLength="255" />
+          <Property Name="shortage" Type="float" />
+          <Property Name="unitsInStock" Type="ntext" />
+          <Property Name="owner" Type="varchar" MaxLength="50" />
+          <Property Name="createDate" Type="datetime" />
+        </EntityType>
         <EntityType Name="temp2">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="po" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="modelName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="material" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="quantity" Type="int" Nullable="false" />
+          <Property Name="remark" Type="nvarchar" MaxLength="500" />
+          <Property Name="createDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="temp2_Log">
           <Key>
             <PropertyRef Name="id" />
           </Key>
@@ -32,7 +57,9 @@
         </EntityType>
         <EntityContainer Name="ATMCModelStoreContainer">
           <EntitySet Name="temp1" EntityType="Self.temp1" Schema="M3_TEMP" store:Type="Tables" />
+          <EntitySet Name="temp1_Log" EntityType="Self.temp1_Log" Schema="M3_TEMP" store:Type="Tables" />
           <EntitySet Name="temp2" EntityType="Self.temp2" Schema="M3_TEMP" store:Type="Tables" />
+          <EntitySet Name="temp2_Log" EntityType="Self.temp2_Log" Schema="M3_TEMP" store:Type="Tables" />
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -66,7 +93,34 @@
         <EntityContainer Name="ATMCEntities1" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="temp1" EntityType="Self.temp1" />
           <EntitySet Name="temp2" EntityType="Self.temp2" />
+          <EntitySet Name="temp1_Log" EntityType="ATMCModel.temp1_Log" />
+          <EntitySet Name="temp2_Log" EntityType="ATMCModel.temp2_Log" />
         </EntityContainer>
+        <EntityType Name="temp1_Log">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="po" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="modelName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="material" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="shortage" Type="Double" />
+          <Property Name="unitsInStock" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="owner" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="createDate" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="temp2_Log">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="po" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="modelName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="material" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="quantity" Type="Int32" Nullable="false" />
+          <Property Name="remark" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="createDate" Type="DateTime" Precision="3" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -97,6 +151,33 @@
                 <ScalarProperty Name="modelName" ColumnName="modelName" />
                 <ScalarProperty Name="quantity" ColumnName="quantity" />
                 <ScalarProperty Name="remark" ColumnName="remark" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="temp1_Log">
+            <EntityTypeMapping TypeName="ATMCModel.temp1_Log">
+              <MappingFragment StoreEntitySet="temp1_Log">
+                <ScalarProperty Name="createDate" ColumnName="createDate" />
+                <ScalarProperty Name="owner" ColumnName="owner" />
+                <ScalarProperty Name="unitsInStock" ColumnName="unitsInStock" />
+                <ScalarProperty Name="shortage" ColumnName="shortage" />
+                <ScalarProperty Name="material" ColumnName="material" />
+                <ScalarProperty Name="modelName" ColumnName="modelName" />
+                <ScalarProperty Name="po" ColumnName="po" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="temp2_Log">
+            <EntityTypeMapping TypeName="ATMCModel.temp2_Log">
+              <MappingFragment StoreEntitySet="temp2_Log">
+                <ScalarProperty Name="createDate" ColumnName="createDate" />
+                <ScalarProperty Name="remark" ColumnName="remark" />
+                <ScalarProperty Name="quantity" ColumnName="quantity" />
+                <ScalarProperty Name="material" ColumnName="material" />
+                <ScalarProperty Name="modelName" ColumnName="modelName" />
+                <ScalarProperty Name="po" ColumnName="po" />
+                <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

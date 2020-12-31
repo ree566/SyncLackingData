@@ -10,6 +10,9 @@
         <EntityTypeShape EntityType="lackingModel.users" Width="1.5" PointX="0.75" PointY="1.375" IsExpanded="true" />
         <AssociationConnector Association="lackingModel.items_ibfk_1" ManuallyRouted="false" />
         <AssociationConnector Association="lackingModel.orders_ibfk_4" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="lackingModel.replies" Width="1.5" PointX="5.25" PointY="4.375" />
+        <AssociationConnector Association="lackingModel.replies_ibfk_1" />
+        <AssociationConnector Association="lackingModel.replies_ibfk_3" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
